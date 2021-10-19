@@ -7,10 +7,21 @@ import {ListGroup,ListGroupItem} from "reactstrap";
 
 export default class CategoryList extends Component {
    
-    //render componenti (sadece değişen componenti) değişikliklerini uygulayan bir fonksiyondur
+constructor(props){
+    //Component class ına gönderiyoruz oradan kalıtıyor zaten
+    //BaseClass a gönderme nedenimiz this keyword ü CategoryList classına değil Component e karşılık geliyor(kalıtım alınan)
+    super(props);
+    state:{};
+}
+
+
+//render componenti (sadece değişen componenti) değişikliklerini uygulayan bir fonksiyondur
  render() {
         return (
             <div>
+                {/* Süslü parantezler JS kodu yazacağımı belirtiyor */}
+                {/* AppComponent ten gönderdiğim info değişkenine eriştim */}
+                <h3>{this.props.info.title}</h3>
                 <ListGroup>
                   <ListGroupItem>Cras justo odio</ListGroupItem>
                   <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>

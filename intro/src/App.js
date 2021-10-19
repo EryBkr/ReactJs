@@ -1,3 +1,4 @@
+import { Container,Row,Col } from "reactstrap";
 import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
@@ -8,14 +9,28 @@ function App() {
   //Buraya yazacağımız tag ler div içerisinde olmalıdır
   return (
     <div>
-      {/* Navi bizim oluşturduğumuz componenttir */}
-      <Navi></Navi>
+      {/* Container ve Row ReactStrap kütüphanesinden geliyor */}
+      <Container>
+        <Row>
+            {/* Navi bizim oluşturduğumuz componenttir */}
+            <Navi></Navi>
+        </Row>
+        <Row>
+          {/* Aynı Bootstrap kullanımı gibi */}
+          <Col xs="3">
+            {/* CategoryList bizim oluşturduğumuz componenttir */}
+            <CategoryList></CategoryList>
+          </Col>
+          <Col xs="9">
+            {/* ProductList bizim oluşturduğumuz componenttir */}
+            <ProductList></ProductList>
+          </Col>
+        </Row>
+      </Container>
 
-      {/* CategoryList bizim oluşturduğumuz componenttir */}
-      <CategoryList></CategoryList>
+  
 
-      {/* ProductList bizim oluşturduğumuz componenttir */}
-      <ProductList></ProductList>
+     
     </div>
   );
 }

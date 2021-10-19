@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// npm install --save reactstrap react react-dom komutuyla yüklediğimiz reactstrap kütüphanesini import ediyoruz
+//Bootstrap ın react versiyonu gibi düşünebiliriz
+import "bootstrap/dist/css/bootstrap.min.css";
+
+//Ana Componentin tanımlandığı dosyadır index.js
+//index.html içerisinde ki root id li div e App componenti ni yerleştiriyor
 ReactDOM.render(
   <React.StrictMode>
     <App />

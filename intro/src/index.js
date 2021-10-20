@@ -10,13 +10,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //Alertify.js i ekliyorum
 import "alertifyjs/build/css/alertify.css";
 
+//Router i ekliyoruz
+import {BrowserRouter} from "react-router-dom";
+
 
 //Ana Componentin tanımlandığı dosyadır index.js
 //index.html içerisinde ki root id li div e App componenti ni yerleştiriyor
+//Router ın çalışması için aşağıda düzenleme yaptık
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

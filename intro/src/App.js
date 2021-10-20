@@ -4,6 +4,9 @@ import Navi from "./Navi";
 import ProductList from "./ProductList";
 import React, { Component } from 'react';
 import alertify from "alertifyjs";
+import { Route, Switch } from "react-router";
+import NotFound from "./NotFound";
+import CartList from "./CartList";
 
 export default class App extends Component {
 
@@ -75,6 +78,9 @@ getProducts=(categoryId)=>{
 
     //elde ettiğimiz diziyi state içerisinde ki cart dizisine set ediyoruz
     this.setState({cart:newCart});
+
+    //Ürün sepetten çıkartıldığı zaman uyarı vereceğiz
+    alertify.error("Product removed from cart");
   };
  
   
@@ -101,11 +107,32 @@ getProducts=(categoryId)=>{
               <CategoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={productInfo}></CategoryList>
             </Col>
             <Col xs="9">
-              {/* ProductList bizim oluşturduğumuz componenttir */}
-              {/* info değişkeni içerisinde ki datayı ProductList componente gönderiyorum */}
-              {/* props ile apiden gelen product listemi gönderdim */}
-              {/* props ile beraber addToCart fonksiyonumu ProductList e gönderdim */}
-              <ProductList addToCart={this.addToCart} products={this.state.products} currentCategory={this.state.currentCategory} info={categoryInfo}></ProductList>
+
+              {/* Switch sırasıyla Root ları gezerek ilerler */}
+              <Switch>
+                {/* Bir çok parametre gereken componentleri bu şekilde render ederek route layabiliriz */}
+                <Route exact path="/" render={
+                    props=>(
+                      <ProductList
+                      {...props} 
+                      addToCart={this.addToCart} 
+                      products={this.state.products} 
+                      currentCategory={this.state.currentCategory} 
+                      info={categoryInfo}></ProductList>
+                    )
+                } />
+                {/* Sepete gitmek istediğimiz de gerekli event ve dataları render ederek gönderip geçiş yapabiliriz */}
+                <Route exact path="/cart" render={
+                    props=>(
+                      <CartList
+                      {...props} 
+                      removeFromCart={this.removeFromCart} 
+                      cart={this.state.cart} >
+                      </CartList>
+                    )
+                } />
+                <Route component={NotFound} />
+              </Switch>
             </Col>
           </Row>
         </Container>

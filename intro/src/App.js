@@ -5,14 +5,42 @@ import ProductList from "./ProductList";
 import React, { Component } from 'react'
 
 export default class App extends Component {
-  
-  state={currentCategory:""};
+
+  //State Yapıcı metotta olmak zorunda değil
+  state={currentCategory:"",products:[],categoryId:0};
+
+  //Component oluştuğu zaman çalışacak olan fonksiyon
+  componentDidMount(){
+    this.getProducts();
+  }
 
   //category i değiştirecek arrow function
   changeCategory=(category)=>{
     //this.setState state içerisinde ki datayı değiştirmemizi sağlayan bir fonksiyon
-    this.setState({currentCategory:category.categoryName})
+    this.setState({currentCategory:category.categoryName});
+
+    //Category componentten kategori menüsüne tıklanınca burası tetiklenecek ve id atamasını state içerisinde ki categoryId property ime yapacak (props ile gönderdik çünkü)
+    this.setState({categoryId:category.id});
+
+    //Category e tıklandığında tıklanan category id ile filtreleme yapıyoruz
+    this.getProducts(this.state.categoryId);
+
 };
+
+//ürünleri apiden çağıracak olan metot
+//categoryId ile filtrelemek için ekledim
+getProducts=(categoryId)=>{
+  let url="http://localhost:3000/products";
+
+  //Filtre gelmiş mi
+  if(categoryId>0){
+    url+="/?categoryId="+categoryId;
+  }
+
+  fetch(url)
+  .then(response=>response.json())
+  .then(data=>this.setState({products:data})); //state de bulunan products dizisine gelen datayı atıyorum
+}
   
   render() {
   let productInfo={title:"Ürün Listesi",id:5};
@@ -39,7 +67,8 @@ export default class App extends Component {
             <Col xs="9">
               {/* ProductList bizim oluşturduğumuz componenttir */}
               {/* info değişkeni içerisinde ki datayı ProductList componente gönderiyorum */}
-              <ProductList currentCategory={this.state.currentCategory} info={categoryInfo}></ProductList>
+              {/* props ile apiden gelen product listemi gönderdim */}
+              <ProductList products={this.state.products} currentCategory={this.state.currentCategory} info={categoryInfo}></ProductList>
             </Col>
           </Row>
         </Container>

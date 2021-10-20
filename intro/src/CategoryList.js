@@ -16,9 +16,25 @@ constructor(props){
     //State component e ait datayı temsil eder
     //State deki bir data değiştiği zaman onu kullanan her yerde refresh işlemi olur (sadece onun bulunduğu bölüm değişir)
     this.state={
-        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}]
+        //Apiden gelen datayı buraya atacağız
+        categories:[]
     };
 }
+
+//Component Yerleştiğinde çalışacak
+componentDidMount(){
+   //Api ye git kategori bilgilerini al 
+  this.getCategories();
+}
+
+//Api ye istek atıyoruz
+getCategories=()=>{
+    fetch("http://localhost:3000/categories")
+    .then(response=>response.json())
+    .then(data=>this.setState({categories:data})); //apiden gelen json datasını categories dizisine atıyorum
+}
+
+
 //render componenti (sadece değişen componenti) değişikliklerini uygulayan bir fonksiyondur
  render() {
         return (
@@ -34,12 +50,10 @@ constructor(props){
 
                         //React döngülerde key kullanmamızı ister ki html elemanları unique olsun.Bunu performans algoritması için talep eder
                         //onClick olduğunda currentcategory de ki değer tıklanan category nin ismi ile değişsin
-                         <ListGroupItem onClick={()=>this.props.changeCategory(category) } key={category.categoryId}>{category.categoryName}</ListGroupItem>
+                         <ListGroupItem onClick={()=>this.props.changeCategory(category) } key={category.id}>{category.categoryName}</ListGroupItem>
                         ))
                     }
               </ListGroup>
-
-              <h4>{this.props.currentCategory}</h4>
             </div>
         )
     }

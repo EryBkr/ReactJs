@@ -50,7 +50,8 @@ getCategories=()=>{
 
                         //React döngülerde key kullanmamızı ister ki html elemanları unique olsun.Bunu performans algoritması için talep eder
                         //onClick olduğunda currentcategory de ki değer tıklanan category nin ismi ile değişsin
-                         <ListGroupItem onClick={()=>this.props.changeCategory(category) } key={category.id}>{category.categoryName}</ListGroupItem>
+                        //Tıklanan kategorinin ismine göre menü deki active class ına true ya da false vererek background blue özelliğini veriyoruz
+                         <ListGroupItem active={category.categoryName===this.props.currentCategory?true:false} onClick={()=>this.props.changeCategory(category) } key={category.id}>{category.categoryName}</ListGroupItem>
                         ))
                     }
               </ListGroup>

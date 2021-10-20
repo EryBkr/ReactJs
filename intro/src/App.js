@@ -7,7 +7,7 @@ import React, { Component } from 'react'
 export default class App extends Component {
 
   //State Yapıcı metotta olmak zorunda değil
-  state={currentCategory:"",products:[],categoryId:0};
+  state={currentCategory:"",products:[],categoryId:0,cart:[]};
 
   //Component oluştuğu zaman çalışacak olan fonksiyon
   componentDidMount(){
@@ -37,10 +37,35 @@ getProducts=(categoryId)=>{
     url+="/?categoryId="+categoryId;
   }
 
+  
+
   fetch(url)
   .then(response=>response.json())
   .then(data=>this.setState({products:data})); //state de bulunan products dizisine gelen datayı atıyorum
 }
+
+  //Sepete ürün ekleme metodu
+  addToCart=(product)=>{
+    //State içerisinde bulunan cart dizisini newCart değişkenine atıyorum
+    let newCart=this.state.cart;
+
+    //Bu ürün daha önce sepete eklenmiş mi
+    var addedItem=newCart.find(c=>c.product.id===product.id);
+
+    if(addedItem){
+      //ürün daha önce sepete eklenmiş adedini güncellesek yeterli
+      addedItem.quantity+=1;
+      }
+      else{
+        //daha önce bu ürün sepete eklenmemiş artık ekleme işlemini yapıyorum
+        //sepete ürün ve added bilgisini giriyorum
+        newCart.push({product:product,quantity:1});
+      }
+  
+    //State içerisinde ki cart dizisini güncelledim
+    this.setState({cart:newCart});
+  }
+ 
   
   render() {
   let productInfo={title:"Ürün Listesi",id:5};
@@ -52,10 +77,9 @@ getProducts=(categoryId)=>{
       <div>
         {/* Container ve Row ReactStrap kütüphanesinden geliyor */}
         <Container>
-          <Row>
-              {/* Navi bizim oluşturduğumuz componenttir */}
-              <Navi></Navi>
-          </Row>
+          {/* Navi bizim oluşturduğumuz componenttir */}
+          {/* alışveriş sepetini navbar a gönderdim */}
+          <Navi cart={this.state.cart}></Navi>
           <Row>
             {/* Aynı Bootstrap kullanımı gibi */}
             <Col xs="3">
@@ -68,7 +92,8 @@ getProducts=(categoryId)=>{
               {/* ProductList bizim oluşturduğumuz componenttir */}
               {/* info değişkeni içerisinde ki datayı ProductList componente gönderiyorum */}
               {/* props ile apiden gelen product listemi gönderdim */}
-              <ProductList products={this.state.products} currentCategory={this.state.currentCategory} info={categoryInfo}></ProductList>
+              {/* props ile beraber addToCart fonksiyonumu ProductList e gönderdim */}
+              <ProductList addToCart={this.addToCart} products={this.state.products} currentCategory={this.state.currentCategory} info={categoryInfo}></ProductList>
             </Col>
           </Row>
         </Container>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 //Table reactstrap ten gelen bir özellik
-import {Table} from "reactstrap";
+import {Table,ButtonToggle} from "reactstrap";
 
 export default class ProductList extends Component {
 
- 
+
     render() {
         return (
             <div>
@@ -21,6 +21,7 @@ export default class ProductList extends Component {
                     <th>Unit Price</th>
                     <th>Quantity Per Unit</th>
                     <th>Units In Stock</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,8 @@ export default class ProductList extends Component {
                                 <td>{product.unitPrice}</td>
                                 <td>{product.quantityPerUnit}</td>
                                 <td>{product.unitsInStock}</td>
+                                {/* App componentin den gelen addToCart fonksiyonuna ekliyorum */}
+                                <td> <ButtonToggle onClick={()=>this.props.addToCart(product)} color="info">add</ButtonToggle></td>
                            </tr>
                           ))
                         }

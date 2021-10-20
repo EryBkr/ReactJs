@@ -7,6 +7,8 @@ import alertify from "alertifyjs";
 import { Route, Switch } from "react-router";
 import NotFound from "./NotFound";
 import CartList from "./CartList";
+import FormDemo from "./FormDemo";
+import RichForm from "./RichForm";
 
 export default class App extends Component {
 
@@ -131,6 +133,9 @@ getProducts=(categoryId)=>{
                       </CartList>
                     )
                 } />
+                {/* Hangi Path in hangi componente denk geleceğini belirledik */}
+                <Route path="/form" component={FormDemo} />
+                <Route path="/richform"  component={RichForm}/>
                 <Route component={NotFound} />
               </Switch>
             </Col>

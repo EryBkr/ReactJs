@@ -15,10 +15,16 @@ constructor(props){
 
     //State component e ait datayı temsil eder
     this.state={
-        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}]
+        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}],
+        currentCategory:""
     };
 }
 
+//category i değiştirecek arrow function
+changeCategory=(category)=>{
+    //this.setState state içerisinde ki datayı değiştirmemizi sağlayan bir fonksiyon
+    this.setState({currentCategory:category.categoryName})
+}
 
 //render componenti (sadece değişen componenti) değişikliklerini uygulayan bir fonksiyondur
  render() {
@@ -34,11 +40,13 @@ constructor(props){
                         this.state.categories.map(category=>(
 
                         //React döngülerde key kullanmamızı ister ki html elemanları unique olsun.Bunu performans algoritması için talep eder
-                         <ListGroupItem key={category.categoryId}>{category.categoryName}</ListGroupItem>
+                        //onClick olduğunda currentcategory de ki değer tıklanan category nin ismi ile değişsin
+                         <ListGroupItem onClick={()=>this.changeCategory(category) } key={category.categoryId}>{category.categoryName}</ListGroupItem>
                         ))
                     }
-                 
               </ListGroup>
+
+              <h4>{this.state.currentCategory}</h4>
             </div>
         )
     }

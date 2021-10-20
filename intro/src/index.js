@@ -7,6 +7,10 @@ import reportWebVitals from './reportWebVitals';
 //Bootstrap ın react versiyonu gibi düşünebiliriz
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//Alertify.js i ekliyorum
+import "alertifyjs/build/css/alertify.css";
+
+
 //Ana Componentin tanımlandığı dosyadır index.js
 //index.html içerisinde ki root id li div e App componenti ni yerleştiriyor
 ReactDOM.render(

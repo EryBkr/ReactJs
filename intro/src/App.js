@@ -2,7 +2,8 @@ import { Container,Row,Col } from "reactstrap";
 import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import alertify from "alertifyjs";
 
 export default class App extends Component {
 
@@ -37,8 +38,6 @@ getProducts=(categoryId)=>{
     url+="/?categoryId="+categoryId;
   }
 
-  
-
   fetch(url)
   .then(response=>response.json())
   .then(data=>this.setState({products:data})); //state de bulunan products dizisine gelen datayı atıyorum
@@ -64,7 +63,19 @@ getProducts=(categoryId)=>{
   
     //State içerisinde ki cart dizisini güncelledim
     this.setState({cart:newCart});
+
+    //Başarılı bir şekilde eklendiğine dair alertify mesajı gönderiyoruz
+    alertify.success("Ürün başarıyla eklendi");
   }
+
+  //Cart tan ürün çıkartmak için kullanacağımız fonksiyon
+  removeFromCart=(product)=>{
+    //Cart dizisi içerisinden verilen üründen farklı olanları geri dönecek 
+    let newCart=this.state.cart.filter(c=>c.product.id!==product.id);
+
+    //elde ettiğimiz diziyi state içerisinde ki cart dizisine set ediyoruz
+    this.setState({cart:newCart});
+  };
  
   
   render() {
@@ -79,7 +90,8 @@ getProducts=(categoryId)=>{
         <Container>
           {/* Navi bizim oluşturduğumuz componenttir */}
           {/* alışveriş sepetini navbar a gönderdim */}
-          <Navi cart={this.state.cart}></Navi>
+          {/* Ürün çıkartma fonksiyonunu Navi componente oradan da CartSummary componentine gönderiyorum */}
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart}></Navi>
           <Row>
             {/* Aynı Bootstrap kullanımı gibi */}
             <Col xs="3">

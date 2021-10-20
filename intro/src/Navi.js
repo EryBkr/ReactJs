@@ -6,12 +6,9 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
+import CartSummary from './CartSummary';
 
 const Navi = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,24 +28,10 @@ const Navi = (props) => {
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                  {/* App.js den gönderdiğimiz cart dizisinin boyutunu yazdırıyoruz */}
-                Options - {props.cart.length}
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            {/* Menü üzerinde ürünlerin görülebilmesi için eklediğim Component */}
+            {/* App.js den gelen cart dizisini CartSummary Componente gönderdim */}
+            {/* Props içerisinde App.js den gelen fonksiyonumu CartSummaryFonksiyonuna gönderiyorum */}
+           <CartSummary removeFromCart={props.removeFromCart} cart={props.cart}/>
           </Nav>
         </Collapse>
       </Navbar>

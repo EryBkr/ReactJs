@@ -7,11 +7,16 @@ import {ListGroup,ListGroupItem} from "reactstrap";
 
 export default class CategoryList extends Component {
    
+//props başka componentten gönderilen datayı temsil eder    
 constructor(props){
     //Component class ına gönderiyoruz oradan kalıtıyor zaten
     //BaseClass a gönderme nedenimiz this keyword ü CategoryList classına değil Component e karşılık geliyor(kalıtım alınan)
     super(props);
-    state:{};
+
+    //State component e ait datayı temsil eder
+    this.state={
+        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}]
+    };
 }
 
 
@@ -22,12 +27,17 @@ constructor(props){
                 {/* Süslü parantezler JS kodu yazacağımı belirtiyor */}
                 {/* AppComponent ten gönderdiğim info değişkenine eriştim */}
                 <h3>{this.props.info.title}</h3>
+               
                 <ListGroup>
-                  <ListGroupItem>Cras justo odio</ListGroupItem>
-                  <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                  <ListGroupItem>Morbi leo risus</ListGroupItem>
-                  <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-                  <ListGroupItem>Vestibulum at eros</ListGroupItem>
+                    {
+                        //state içerisinde bulunan categories içerisinde ki dataları dönerek menüyü oluşturdum
+                        this.state.categories.map(category=>(
+
+                        //React döngülerde key kullanmamızı ister ki html elemanları unique olsun.Bunu performans algoritması için talep eder
+                         <ListGroupItem key={category.categoryId}>{category.categoryName}</ListGroupItem>
+                        ))
+                    }
+                 
               </ListGroup>
             </div>
         )

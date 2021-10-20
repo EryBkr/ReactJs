@@ -14,18 +14,11 @@ constructor(props){
     super(props);
 
     //State component e ait datayı temsil eder
+    //State deki bir data değiştiği zaman onu kullanan her yerde refresh işlemi olur (sadece onun bulunduğu bölüm değişir)
     this.state={
-        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}],
-        currentCategory:""
+        categories:[{categoryId:1,categoryName:"Beverages"},{categoryId:2,categoryName:"Condiment"},{categoryId:3,categoryName:"Tech"}]
     };
 }
-
-//category i değiştirecek arrow function
-changeCategory=(category)=>{
-    //this.setState state içerisinde ki datayı değiştirmemizi sağlayan bir fonksiyon
-    this.setState({currentCategory:category.categoryName})
-}
-
 //render componenti (sadece değişen componenti) değişikliklerini uygulayan bir fonksiyondur
  render() {
         return (
@@ -41,12 +34,12 @@ changeCategory=(category)=>{
 
                         //React döngülerde key kullanmamızı ister ki html elemanları unique olsun.Bunu performans algoritması için talep eder
                         //onClick olduğunda currentcategory de ki değer tıklanan category nin ismi ile değişsin
-                         <ListGroupItem onClick={()=>this.changeCategory(category) } key={category.categoryId}>{category.categoryName}</ListGroupItem>
+                         <ListGroupItem onClick={()=>this.props.changeCategory(category) } key={category.categoryId}>{category.categoryName}</ListGroupItem>
                         ))
                     }
               </ListGroup>
 
-              <h4>{this.state.currentCategory}</h4>
+              <h4>{this.props.currentCategory}</h4>
             </div>
         )
     }

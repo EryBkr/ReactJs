@@ -7,14 +7,20 @@ import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import configureStore from "./redux/reducers/configureStore";
+//Router mekanızması için ekledim
+import { BrowserRouter } from 'react-router-dom';
+import "alertifyjs/build/css/alertify.css";
 
 //Bütün reducer ların store eklenmiş halini alıyoruz
 const store=configureStore();
 
+//Redux için Provider ile Routing için BrowserRouter ile çevreledim
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+   <Provider store={store}>
+     <App />
+   </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

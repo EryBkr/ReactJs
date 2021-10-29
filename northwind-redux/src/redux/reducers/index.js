@@ -5,6 +5,7 @@ import changeCategoryReducer from "../reducers/changeCategoryReducer";
 import categoryListReducer from "../reducers/categoryListReducer";
 import productListReducer from "../reducers/productListReducer";
 import cartReducer from "../reducers/cartReducer";
+import saveProductReducer from "../reducers/saveProductReducer";
 
 
 //uygulamam daki tüm reducer ları burada toplayacağım
@@ -12,7 +13,8 @@ const rootReducer=combineReducers({
     changeCategoryReducer,
     categoryListReducer,
     productListReducer,
-    cartReducer
+    cartReducer,
+    saveProductReducer
 });
 
 export default rootReducer;

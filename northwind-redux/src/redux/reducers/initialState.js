@@ -3,5 +3,6 @@ export default {
     currentCategory:{categoryName:"Soğuk İçecekler"}, //default bir obje oluşturduk
     categories:[], //kategorileri dönecek reducer için default bir dizi oluşturduk
     products:[], //ürünleri dönecek reducer için default bir dizi oluşturduk
-    cart:[]//alışveriş sepetinin default halini oluşturdum
+    cart:[],//alışveriş sepetinin default halini oluşturdum
+    savedProduct:{}//boş product nesnesi
 }

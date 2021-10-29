@@ -1,5 +1,4 @@
 //ActionTypes dosyasında  ki herşeyi al
-import { act } from "react-dom/test-utils";
 import * as actionTypes from "../actions/actionsTypes";
 //state parametresi için default değerleri barındıran dosya
 import initialState from "./initialState";

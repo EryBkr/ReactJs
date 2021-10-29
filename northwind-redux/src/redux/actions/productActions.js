@@ -56,6 +56,7 @@ export function saveProductApi(product) {
 }
 
 export function saveProduct(product) {
+    debugger
     return function (dispatch) {
         //API işlemi yapılıyor
         return saveProductApi(product).then(savedProduct => {
